@@ -60,7 +60,7 @@ class TicketController extends Controller
             return TicketApiResponse::success($ticket, 201);
         }
 
-        return view('ticket');
+        return view('ticket', ['success' => 'Ticket created successfully.']);
     }
 
     public function show($id)

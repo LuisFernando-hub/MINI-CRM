@@ -248,4 +248,17 @@
             </tr>
         </tfoot>
     </x-table>
+
+@if (session('success'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Sucesso!',
+            text: "{{ session('success') }}",
+            confirmButtonText: 'Fechar',
+            timer: 3000,
+            timerProgressBar: true
+        });
+    </script>
+@endif
 </x-layouts.app>

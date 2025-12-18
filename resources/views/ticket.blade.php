@@ -39,4 +39,17 @@
     </div>
 </div>
 
+@if (isset($success))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Sucesso!',
+            text: "{{ $success }}",
+            confirmButtonText: 'Fechar',
+            timer: 3000,
+            timerProgressBar: true
+        });
+    </script>
+@endif
+
 </x-layouts.app>
