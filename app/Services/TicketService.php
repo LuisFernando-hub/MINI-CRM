@@ -58,4 +58,9 @@ class TicketService
     {
         return $this->repository->totalTicketsByStatus($status);
     }
+
+    public function getStatistics(): array
+    {
+        return $this->repository->getStatistics();
+    }
 }

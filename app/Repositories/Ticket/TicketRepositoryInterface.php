@@ -22,4 +22,5 @@ interface TicketRepositoryInterface
     public function totalTickets(): int;
 
     public function totalTicketsByStatus(string $status): int;
+    public function getStatistics(): array;
 }
