@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\DTOs\CustomerDTO;
-use App\DTOs\TicketDTO;
-use App\Http\Requests\TicketStoreRequest;
-use App\Http\Requests\TicketUpdateStatusRequest;
+use App\DTOs\Customer\CustomerDTO;
+use App\DTOs\Ticket\TicketDTO;
+use App\DTOs\Ticket\TicketUpdateDTO;
+use App\Http\Requests\Ticket\TicketStoreRequest;
+use App\Http\Requests\Ticket\TicketUpdateRequest;
 use App\Http\Responses\ApiResponse;
-use App\Services\CustomerService;
 use App\Services\TicketService;
 use Illuminate\Http\Request;
 
@@ -44,7 +44,7 @@ class TicketController extends Controller
     
     public function create()
     {
-        return view('ticket');
+        return response()->view('ticket')->header('X-Frame-Options', 'ALLOWALL'); 
     }
 
     public function store(TicketStoreRequest $request)
@@ -66,12 +66,9 @@ class TicketController extends Controller
     {
     }
 
-    public function updateStatus(TicketUpdateStatusRequest $request, $id)
+    public function update(TicketUpdateRequest $request, $id)
     {
-        $ticket = $this->service->updateStatus(
-            id: $id,
-            status: $request->validated()['status']
-        );
+        $ticket = $this->service->update($id, TicketUpdateDTO::fromArray($request->validated()));
 
         if ($request->expectsJson()) {
             return ApiResponse::success($ticket, 200);
@@ -88,6 +85,6 @@ class TicketController extends Controller
             return ApiResponse::success(message: 'Ticket deleted successfully');
         }
 
-        return redirect()->route('dashboard')->with('success', 'Ticket updated successfully.');
+        return redirect()->route('dashboard')->with('success', 'Ticket deleted successfully.');
     }
 }

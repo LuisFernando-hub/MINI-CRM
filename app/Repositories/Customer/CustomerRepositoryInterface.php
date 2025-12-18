@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\Customer;
 
-use App\DTOs\CustomerDTO;
+use App\DTOs\Customer\CustomerDTO;
 use App\Models\Customer;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 

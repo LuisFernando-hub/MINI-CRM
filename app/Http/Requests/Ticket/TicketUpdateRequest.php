@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Ticket;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TicketUpdateStatusRequest extends FormRequest
+class TicketUpdateRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -15,6 +15,7 @@ class TicketUpdateStatusRequest extends FormRequest
     {
         return [
             'status' => 'required|in:new,in_progress,processed',
+            'response' => 'nullable|string',
         ];
     }
 

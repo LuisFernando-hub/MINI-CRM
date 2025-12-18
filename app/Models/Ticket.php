@@ -14,6 +14,8 @@ class Ticket extends Model
         'description',
         'status',
         'customer_id',
+        'released_date',
+        'response'
     ];
 
     public function customer()

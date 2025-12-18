@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\Ticket;
 
-use App\DTOs\TicketDTO;
+use App\DTOs\Ticket\TicketDTO;
+use App\DTOs\Ticket\TicketUpdateDTO;
 use App\Models\Ticket;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
@@ -14,8 +15,7 @@ interface TicketRepositoryInterface
 
     public function create(TicketDTO $data): Ticket;
 
-    public function update($id, TicketDTO $data): Ticket;
-    public function updateStatus($id, $status): Ticket;
+    public function update($id, TicketUpdateDTO $data): Ticket;
 
     public function delete($id): void;
 

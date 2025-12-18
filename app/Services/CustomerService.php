@@ -2,9 +2,9 @@
 
 namespace App\Services;
 
-use App\DTOs\CustomerDTO;
+use App\DTOs\Customer\CustomerDTO;
 use App\Models\Customer;
-use App\Repositories\CustomerRepositoryInterface;
+use App\Repositories\Customer\CustomerRepositoryInterface;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\UploadedFile;
 

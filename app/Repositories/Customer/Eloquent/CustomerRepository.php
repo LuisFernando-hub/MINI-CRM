@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Repositories\Eloquent;
+namespace App\Repositories\Customer\Eloquent;
 
-use App\DTOs\CustomerDTO;
+use App\DTOs\Customer\CustomerDTO;
 use App\Models\Customer;
-use App\Repositories\CustomerRepositoryInterface;
-use Illuminate\Database\Eloquent\Collection;
+use App\Repositories\Customer\CustomerRepositoryInterface;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class CustomerRepository implements CustomerRepositoryInterface

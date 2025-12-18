@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DTOs;
+namespace App\DTOs\Ticket;
 
 use App\Enums\TicketStatus;
 

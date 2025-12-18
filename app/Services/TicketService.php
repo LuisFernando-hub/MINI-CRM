@@ -2,10 +2,11 @@
 
 namespace App\Services;
 
-use App\DTOs\CustomerDTO;
-use App\DTOs\TicketDTO;
+use App\DTOs\Customer\CustomerDTO;
+use App\DTOs\Ticket\TicketDTO;
+use App\DTOs\Ticket\TicketUpdateDTO;
 use App\Models\Ticket;
-use App\Repositories\TicketRepositoryInterface;
+use App\Repositories\Ticket\TicketRepositoryInterface;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 
@@ -38,16 +39,11 @@ class TicketService
         return $this->repository->find($id);
     }
 
-    public function update($id, TicketDTO $data)
+    public function update($id, TicketUpdateDTO $data)
     {
         return $this->repository->update($id, $data);
     }
     
-    public function updateStatus($id, $status)
-    {
-        return $this->repository->updateStatus($id, $status);
-    }
-
     public function delete($id)
     {
         $this->repository->delete($id);

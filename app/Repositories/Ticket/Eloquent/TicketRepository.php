@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Repositories\Eloquent;
+namespace App\Repositories\Ticket\Eloquent;
 
-use App\DTOs\TicketDTO;
+use App\DTOs\Ticket\TicketDTO;
+use App\DTOs\Ticket\TicketUpdateDTO;
 use App\Models\Ticket;
-use App\Repositories\TicketRepositoryInterface;
+use App\Repositories\Ticket\TicketRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
@@ -34,7 +35,7 @@ class TicketRepository implements TicketRepositoryInterface
             $query->whereDate('created_at', $filter['date']);
         }
 
-         return $query->paginate( 10);
+         return $query->paginate( 10)->appends(request()->query());
     }
 
     public function find($id): Ticket
@@ -47,17 +48,16 @@ class TicketRepository implements TicketRepositoryInterface
         return Ticket::create($data->toArray());
     }
 
-    public function update($id, TicketDTO $data): Ticket
+    public function update($id, TicketUpdateDTO $data): Ticket
     {
         $ticket = $this->find($id);
-        $ticket->update($data->toArray());
-        return $ticket;
-    }
+        
+        $ticket->update([
+            'response' => $data->response ?? null,
+            'status' => $data->status,
+            'released_date' => now(),
+        ]);
 
-    public function updateStatus($id, $status): Ticket
-    {
-        $ticket = $this->find($id);
-        $ticket->update(['status' => $status]);
         return $ticket;
     }
 
