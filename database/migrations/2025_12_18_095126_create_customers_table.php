@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ticket', function (Blueprint $table) {
+        Schema::create('customers', function (Blueprint $table) {
             $table->id();
-            $table->string('subject');
-            $table->text('description');
-            $table->foreign('customer_id')->references('id')->on('customer');
-            $table->enum('status', ['new', 'in_progress', 'processed'])->default('new');
-            $table->date('released_date')->nullable();
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('phone_number', 20)->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ticket');
+        Schema::dropIfExists('customers');
     }
 };
