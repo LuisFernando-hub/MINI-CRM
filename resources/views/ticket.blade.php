@@ -3,7 +3,7 @@
 
 <div class="min-h-screen mb-6 mt-[-50px] flex items-center justify-center">
     <div class="flex flex-col items-center w-full">
-        <h1>Create Ticket</h1>
+        <h1>Customer Feedback Form</h1>
         <form class="max-w-md mb-10 w-full" enctype="multipart/form-data" action="{{ route('tickets.store') }}" method="POST">
             @csrf
             @method('POST')
@@ -29,7 +29,7 @@
             </div>
 
             <div class="mb-6">
-                <x-forms.input label="Description" name="description" type="text"/>
+                <x-forms.textarea label="Description" name="description" rows="6"/>
             </div>
 
             <div>
