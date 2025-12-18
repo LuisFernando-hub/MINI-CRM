@@ -8,6 +8,7 @@ use App\DTOs\Ticket\TicketUpdateDTO;
 use App\Http\Requests\Ticket\TicketStoreRequest;
 use App\Http\Requests\Ticket\TicketUpdateRequest;
 use App\Http\Responses\ApiResponse;
+use App\Http\Responses\TicketApiResponse;
 use App\Services\TicketService;
 use Illuminate\Http\Request;
 
@@ -56,7 +57,7 @@ class TicketController extends Controller
         );
 
         if ($request->expectsJson()) {
-            return ApiResponse::success($ticket, 201);
+            return TicketApiResponse::success($ticket, 201);
         }
 
         return view('ticket');
@@ -71,7 +72,7 @@ class TicketController extends Controller
         $ticket = $this->service->update($id, TicketUpdateDTO::fromArray($request->validated()));
 
         if ($request->expectsJson()) {
-            return ApiResponse::success($ticket, 200);
+            return TicketApiResponse::success($ticket, 200);
         }
 
         return redirect()->route('dashboard')->with('success', 'Ticket updated successfully.');
@@ -82,9 +83,16 @@ class TicketController extends Controller
         $this->service->delete($id);
 
         if ($request->expectsJson()) {
-            return ApiResponse::success(message: 'Ticket deleted successfully');
+            return TicketApiResponse::success(message: 'Ticket deleted successfully');
         }
 
         return redirect()->route('dashboard')->with('success', 'Ticket deleted successfully.');
+    }
+
+    public function statistics()
+    {
+        $statistics = $this->service->getStatistics();
+
+        return ApiResponse::success($statistics);
     }
 }
