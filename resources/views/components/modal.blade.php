@@ -25,7 +25,7 @@
 
             <button
                 x-on:click="open = false"
-                class="text-gray-400 hover:text-gray-600"
+                class="text-gray-400 hover:text-gray-600 cursor-pointer"
             >
                 ✕
             </button>

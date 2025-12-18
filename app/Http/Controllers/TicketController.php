@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\DTOs\CustomerDTO;
 use App\DTOs\TicketDTO;
 use App\Http\Requests\TicketRequest;
 use App\Http\Responses\ApiResponse;
+use App\Services\CustomerService;
 use App\Services\TicketService;
 use Illuminate\Http\Request;
 
@@ -28,16 +30,35 @@ class TicketController extends Controller
         $totalTickets = $this->service->totalTickets();
         $totalTicketsNew = $this->service->totalTicketsByStatus('new');
 
+        if ($request->expectsJson()) {
+            return ApiResponse::success([
+                'tickets' => $tickets,
+                'total_tickets' => $totalTickets,
+                'total_tickets_new' => $totalTicketsNew,
+            ]);
+        }
+
         return view('dashboard', compact('tickets', 'totalTickets', 'totalTicketsNew'));
+    }
+    
+    public function create()
+    {
+        return view('ticket');
     }
 
     public function store(TicketRequest $request)
     {
-        $dto = TicketDTO::fromArray($request->validated());
+        $ticket = $this->service->createWithCustomer(
+            ticketDto: TicketDTO::fromArray($request->validated()),
+            customerDto: CustomerDTO::fromArray($request->validated()['customer']),
+            file: $request->file('customer.file')
+        );
 
-        $ticket = $this->service->create($dto);
+        if ($request->expectsJson()) {
+            return ApiResponse::success($ticket, 201);
+        }
 
-        return ApiResponse::success($ticket, 201);
+        return view('ticket');
     }
 
     public function show($id)

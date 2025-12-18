@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\DTOs\CustomerDTO;
 use App\DTOs\TicketDTO;
 use App\Models\Ticket;
 use App\Repositories\TicketRepositoryInterface;
@@ -11,7 +12,8 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 class TicketService
 {
     public function __construct(
-        private readonly TicketRepositoryInterface $repository
+        private readonly TicketRepositoryInterface $repository,
+        private readonly CustomerService $customerService
     ) {}
 
     public function list($filter): LengthAwarePaginator
@@ -19,16 +21,16 @@ class TicketService
         return $this->repository->list($filter);
     }
 
-    public function create(TicketDTO $data): Ticket
-    {
-        $dto = new TicketDTO(
-            subject: $data->subject,
-            description: $data->description,
-            status: $data->status,
-            customerId: $data->customerId,
-        );
+    public function createWithCustomer(
+        TicketDTO $ticketDto,
+        CustomerDTO $customerDto,
+        $file = null
+    ): Ticket {
+        $customer = $this->customerService->create($customerDto, $file);
 
-        return $this->repository->create($dto);
+        $ticketDto = $ticketDto->withCustomerId($customer->id);
+
+        return $this->repository->create($ticketDto);
     }
 
     public function find($id): Ticket
