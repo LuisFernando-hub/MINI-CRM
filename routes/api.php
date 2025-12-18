@@ -12,7 +12,7 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix' => 'ticket'], function () {
-    Route::get('/', [\App\Http\Controllers\TicketController::class, 'index']);
+    Route::get('/', [\App\Http\Controllers\TicketController::class, 'index'])->name('ticket.index');
     Route::post('/', [\App\Http\Controllers\TicketController::class, 'store']);
     Route::get('/{id}', [\App\Http\Controllers\TicketController::class, 'show']);
     Route::put('/{id}', [\App\Http\Controllers\TicketController::class, 'update']);
