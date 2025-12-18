@@ -37,14 +37,14 @@ class CustomerRepository implements CustomerRepositoryInterface
          return $query->paginate( 10);
     }
 
-    public function find($id): Customer
+    public function find($id): ?Customer
     {
-        return Customer::findOrFail($id);
+        return Customer::find($id);
     }
 
-    public function findByEmail($email): Customer
+    public function findByEmail($email): ?Customer
     {
-        return Customer::where('email', $email)->firstOrFail();
+        return Customer::where('email', $email)->first();
     }
 
     public function create(CustomerDTO $data): Customer

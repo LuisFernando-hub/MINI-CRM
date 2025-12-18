@@ -19,8 +19,7 @@ class TicketRequest extends FormRequest
 
             'customer.name'         => 'required|string|max:255',
             'customer.email'        => 'required|email|max:255',
-            'customer.phone_number' => 'string|max:255',
-            'customer.file'         => 'file|max:5120'
+            'customer.phone_number' => 'string|max:255|nullable',
         ];
     }
 
@@ -39,10 +38,6 @@ class TicketRequest extends FormRequest
             'customer.name.required' => 'The customer name is required.',
             'customer.email.required'=> 'The customer email is required.',
             'customer.email.email'   => 'Please provide a valid customer email address.',
-
-            'customer.file.required' => 'A document file is required.',
-            'customer.file.file'     => 'The uploaded document must be a valid file.',
-            'customer.file.max'      => 'The document must not exceed 5MB.',
         ];
     }
 

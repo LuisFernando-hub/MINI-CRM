@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\TicketStatus;
 use App\Services\TicketService;
 use Illuminate\Http\Request;
 
@@ -24,7 +25,8 @@ class DashboardController extends Controller
         $totalTicketsNew = $ticketsService->totalTicketsByStatus('new');
         $totalTicketsInProgess = $ticketsService->totalTicketsByStatus('in_progress');
         $totalTicketsProcessed = $ticketsService->totalTicketsByStatus('processed');
+        $statuses = TicketStatus::cases();
 
-        return view('dashboard', compact('tickets', 'totalTickets', 'totalTicketsNew', 'totalTicketsInProgess', 'totalTicketsProcessed'));
+        return view('dashboard', compact('tickets', 'totalTickets', 'totalTicketsNew', 'totalTicketsInProgess', 'totalTicketsProcessed', 'statuses'));
     }
 }

@@ -17,8 +17,8 @@ class TicketDTO
     {
         return new self(
             subject: $data['subject'],
-            description: $data['description'],
-            status: $data['status'] ?? TicketStatus::fromValue(0),
+            description: $data['description'],  
+            status: $data['status'] ?? TicketStatus::fromValue('new'),
             customerId: $data['customer_id'] ?? null,
         );
     }
@@ -28,7 +28,7 @@ class TicketDTO
         return array_filter([
             'subject' => $this->subject,
             'description' => $this->description,
-            'status' => $this->status ?? TicketStatus::fromValue(0),
+            'status' => $this->status ?? TicketStatus::fromValue('new'),
             'customer_id' => $this->customerId ?? null,
         ]);
     }

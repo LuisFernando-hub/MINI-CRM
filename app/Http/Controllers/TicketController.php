@@ -51,7 +51,7 @@ class TicketController extends Controller
         $ticket = $this->service->createWithCustomer(
             ticketDto: TicketDTO::fromArray($request->validated()),
             customerDto: CustomerDTO::fromArray($request->validated()['customer']),
-            file: $request->file('customer.file')
+            file: $request->file('customer.file') ?? null
         );
 
         if ($request->expectsJson()) {
@@ -67,6 +67,7 @@ class TicketController extends Controller
 
     public function update(Request $request, $id)
     {
+        
     }
 
     public function destroy($id)

@@ -30,14 +30,13 @@ class CustomerService
                 email: $data->email,
                 phone_number: $data->phone_number,
             );
-
             $customer = $this->repository->create($dto);
         } else {
             $customer = $findCustomer;
         }
 
         if ($file) {
-            $customer->addMedia($file)->toMediaCollection('documents');
+            $customer->addMedia($file)->toMediaCollection('documents', 'public');
         }
 
         return $customer;

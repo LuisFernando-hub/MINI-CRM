@@ -12,7 +12,7 @@ class TicketRepository implements TicketRepositoryInterface
 {
     public function list($filter): LengthAwarePaginator
     {
-        $query = Ticket::query()->with('customer');
+        $query = Ticket::query()->with('customer', 'customer.media');
 
         if (!empty($filter['email'])) {
            $query->whereHas('customer', function ($q) use ($filter) {

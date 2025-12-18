@@ -2,29 +2,19 @@
 
 namespace App\Enums;
 
-enum TicketStatus: int 
+enum TicketStatus: string
 {
-    case NEW = 0;
-    case IN_PROGRESS = 1;
-    case PROCESSED = 2;
+    case NEW = 'new';
+    case IN_PROGRESS = 'in_progress';
+    case PROCESSED = 'processed';
 
-    public static function fromValue(int $value): string
+    public static function fromValue(string $value): string
     {
         return match($value) {
             self::NEW->value => 'new',
             self::IN_PROGRESS->value => 'in_progress',
             self::PROCESSED->value => 'processed',
             default => throw new \InvalidArgumentException("Invalid ticket status value: $value"),
-        };
-    }
-
-    public static function fromString(string $status): int
-    {
-        return match($status) {
-            'new' => self::NEW->value,
-            'in_progress' => self::IN_PROGRESS->value,
-            'processed' => self::PROCESSED->value,
-            default => throw new \InvalidArgumentException("Invalid ticket status string: $status"),
         };
     }
 
