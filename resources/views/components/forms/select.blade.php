@@ -21,7 +21,7 @@
     >
         <option value="">{{ $placeholder }}</option>
         @foreach($options as $optionLabel)
-            <option value="{{ $optionLabel->value }}" @selected($selected == $optionLabel->value)>{{ $optionLabel->name }}</option>
+            <option value="{{ $optionLabel->value }}" @selected($selected == $optionLabel->value)>{{ $optionLabel->getReadableName() }}</option>
         @endforeach
     </select>
 </div>

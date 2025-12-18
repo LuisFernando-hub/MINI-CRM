@@ -131,7 +131,7 @@
                 <th class="px-4 py-3">E-mail</th>
                 <th class="px-4 py-3">Subject</th>
                 <th class="px-4 py-3">Status</th>
-                <th class="px-4 py-3">Created At</th>
+                <th class="px-4 py-3">Date Response</th>
                 <th class="px-4 py-3">Actions</th>
             </tr>
         </x-slot>
@@ -142,8 +142,8 @@
                         <td class="px-4 py-3">{{ $ticket->customer->phone_number }}</td>
                         <td class="px-4 py-3">{{ $ticket->customer->email }}</td>
                         <td class="px-4 py-3">{{ $ticket->subject }}</td>
-                        <td class="px-4 py-3">{{ $ticket->status }}</td>
-                        <td class="px-4 py-3">{{ $ticket->created_at }}</td>
+                        <td class="px-4 py-3">{{ $ticket->readable_status }}</td>
+                        <td class="px-4 py-3">{{ $ticket->released_date }}</td>
                         <td>
                             <x-button type="primary"
                                 x-on:click="$dispatch('open-modal', { id: 'customer-details-{{ $ticket->id }}' })">
@@ -166,7 +166,7 @@
                             </div>
 
                             <div>
-                                <strong>Status:</strong> {{ ucfirst($ticket->status) }}
+                                <strong>Status:</strong> {{ ucfirst($ticket->readable_status) }}
                             </div>
 
                             @if($ticket->response)
@@ -217,17 +217,17 @@
                                 @method('PUT')
 
                                 <div class="mb-6">
-                                    <x-forms.textarea label="Response" name="response" placeholder="Response Ticket" rows="6"/>
+                                    <x-forms.textarea label="Response" name="response" :value="$ticket->response" rows="3"/>
                                 </div>
 
                                 <div class="mb-6">
                                     <x-forms.select label="Status" name="status" type="select" :options="$statuses"
-                                        :selected="$ticket->status" />
+                                        :selected="$ticket->status instanceof \App\Enums\TicketStatus ? $ticket->status->value : $ticket->status"  />
                                 </div>
 
                                 <x-slot name="footer">
                                     <div class="flex gap-2 justify-end">
-                                        <x-button type="danger" x-on:click="$dispatch('open-modal', { id: null })">
+                                        <x-button type="danger" x-on:click="open = false">
                                             Close
                                         </x-button>
                                     </div>
