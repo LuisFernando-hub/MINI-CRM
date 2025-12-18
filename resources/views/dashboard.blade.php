@@ -169,6 +169,12 @@
                                 <strong>Status:</strong> {{ ucfirst($ticket->status) }}
                             </div>
 
+                            @if($ticket->response)
+                                <div>
+                                    <strong>Response:</strong> {{ $ticket->response }}
+                                </div>
+                            @endif
+
                             <div>
                                 <strong>Created Ticket:</strong>
                                 {{ $ticket->created_at }}
@@ -205,10 +211,14 @@
                             </div>
                         </div>
                         <div class="flex flex-col w-full">
-                            <form class="max-w-md mb-10 w-full" action="{{ route('tickets.update.status', $ticket->id) }}"
+                            <form class="max-w-md mb-10 w-full" action="{{ route('tickets.update', $ticket->id) }}"
                                 method="POST">
                                 @csrf
                                 @method('PUT')
+
+                                <div class="mb-6">
+                                    <x-forms.textarea label="Response" name="response" placeholder="Response Ticket" rows="6"/>
+                                </div>
 
                                 <div class="mb-6">
                                     <x-forms.select label="Status" name="status" type="select" :options="$statuses"
@@ -227,5 +237,15 @@
                         </div>
                     </x-modal>
         @endforeach
+
+        <tfoot>
+            <tr>
+                <td colspan="8" class="px-4 py-3">
+                    <div class="flex justify-end">
+                        {{ $tickets->links() }}
+                    </div>
+                </td>
+            </tr>
+        </tfoot>
     </x-table>
 </x-layouts.app>
