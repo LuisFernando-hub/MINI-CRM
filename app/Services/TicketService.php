@@ -42,6 +42,11 @@ class TicketService
     {
         return $this->repository->update($id, $data);
     }
+    
+    public function updateStatus($id, $status)
+    {
+        return $this->repository->updateStatus($id, $status);
+    }
 
     public function delete($id)
     {

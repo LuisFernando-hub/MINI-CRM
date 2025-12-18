@@ -26,7 +26,7 @@ Route::group(['prefix' => 'tickets'], function () {
     Route::post('/', [\App\Http\Controllers\TicketController::class, 'store'])->name('tickets.store')->middleware('auth');
     Route::get('/', [\App\Http\Controllers\TicketController::class, 'create'])->name('tickets.create')->middleware('auth');
     Route::get('/{id}', [\App\Http\Controllers\TicketController::class, 'show'])->middleware('auth');
-    Route::put('/{id}', [\App\Http\Controllers\TicketController::class, 'update'])->middleware('auth');
+    Route::put('/{id}', [\App\Http\Controllers\TicketController::class, 'updateStatus'])->name('tickets.update.status')->middleware('auth');
     Route::delete('/{id}', [\App\Http\Controllers\TicketController::class, 'destroy'])->middleware('auth');
 });
 

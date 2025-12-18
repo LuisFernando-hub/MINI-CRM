@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TicketRequest extends FormRequest
+class TicketStoreRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -32,9 +32,6 @@ class TicketRequest extends FormRequest
             'description.required'   => 'The ticket description is required.',
             'description.min'        => 'The ticket description must be at least :min characters.',
 
-            'status.required'        => 'The ticket status is required.',
-            'status.in'              => 'The selected ticket status is invalid.',
-
             'customer.name.required' => 'The customer name is required.',
             'customer.email.required'=> 'The customer email is required.',
             'customer.email.email'   => 'Please provide a valid customer email address.',
@@ -46,7 +43,6 @@ class TicketRequest extends FormRequest
         return [
             'subject'          => 'ticket subject',
             'description'      => 'ticket description',
-            'status'           => 'ticket status',
             'customer.name'    => 'customer name',
             'customer.email'   => 'customer email',
         ];

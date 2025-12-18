@@ -205,26 +205,25 @@
                             </div>
                         </div>
                         <div class="flex flex-col w-full">
-                            <form class="max-w-md mb-10 w-full" enctype="multipart/form-data" action="{{ route('tickets.update') }}"
+                            <form class="max-w-md mb-10 w-full" action="{{ route('tickets.update.status', $ticket->id) }}"
                                 method="POST">
                                 @csrf
-                                @method('POST')
+                                @method('PUT')
 
                                 <div class="mb-6">
                                     <x-forms.select label="Status" name="status" type="select" :options="$statuses"
                                         :selected="$ticket->status" />
                                 </div>
+
+                                <x-slot name="footer">
+                                    <div class="flex gap-2 justify-end">
+                                        <x-button type="danger" x-on:click="$dispatch('open-modal', { id: null })">
+                                            Close
+                                        </x-button>
+                                    </div>
+                                </x-slot>
+                                <x-button type="primary">{{ __('Update Status Ticket') }}</x-button>
                             </form>
-
-                            <x-slot name="footer">
-                                <div class="flex gap-2 justify-end">
-                                    <x-button type="danger" x-on:click="$dispatch('open-modal', { id: null })">
-                                        Close
-                                    </x-button>
-
-                                    <x-button type="primary">{{ __('Update Ticket') }}</x-button>
-                                </div>
-                            </x-slot>
                         </div>
                     </x-modal>
         @endforeach

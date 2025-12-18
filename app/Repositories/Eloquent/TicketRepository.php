@@ -54,6 +54,13 @@ class TicketRepository implements TicketRepositoryInterface
         return $ticket;
     }
 
+    public function updateStatus($id, $status): Ticket
+    {
+        $ticket = $this->find($id);
+        $ticket->update(['status' => $status]);
+        return $ticket;
+    }
+
     public function delete($id): void
     {
         $ticket = $this->find($id);
