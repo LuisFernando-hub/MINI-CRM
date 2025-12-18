@@ -55,17 +55,17 @@
     <!-- Main Container -->
     <div class="min-h-screen flex flex-col">
 
-        @auth
+        @if (Request::is('dashboard') || Request::is('dashboard/*'))
         <x-layouts.app.header />
-        @endauth
+        @endif
 
 
         <!-- Main Content Area -->
         <div class="flex flex-1 overflow-hidden">
 
-            @auth
+            @if (Request::is('dashboard') || Request::is('dashboard/*'))
             <x-layouts.app.sidebar />
-            @endauth
+            @endif
 
             <!-- Main Content -->
             <main class="flex-1 overflow-auto bg-gray-100 dark:bg-gray-900 content-transition">
