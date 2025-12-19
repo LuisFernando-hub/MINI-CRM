@@ -10,7 +10,7 @@ class TicketApiResponse
         return response()->json([
             'status' => 'success',
             'message' => $message,
-            'data' => array_merge(
+            'data' => $ticket ? array_merge(
                 auth()->check() ? ['id' => $ticket->id] : [],
                 [
                     'subject' => $ticket->subject,
@@ -24,7 +24,7 @@ class TicketApiResponse
                         'phone_number' => $ticket->customer->phone_number,
                     ],
                 ]
-            ),
+            ) : null,
         ], $statusCode);
     }
 

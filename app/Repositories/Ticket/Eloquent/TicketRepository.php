@@ -49,10 +49,8 @@ class TicketRepository implements TicketRepositoryInterface
         return Ticket::create($data->toArray());
     }
 
-    public function update($id, TicketUpdateDTO $data): Ticket
+    public function update(Ticket $ticket, TicketUpdateDTO $data): Ticket
     {
-        $ticket = $this->find($id);
-        
         $ticket->update([
             'response' => $data->response ?? null,
             'status' => $data->status,
@@ -62,10 +60,9 @@ class TicketRepository implements TicketRepositoryInterface
         return $ticket;
     }
 
-    public function delete($id): void
+    public function delete(Ticket $ticket): bool
     {
-        $ticket = $this->find($id);
-        $ticket->delete();
+        return $ticket->delete();
     }
 
     public function totalTickets(): int

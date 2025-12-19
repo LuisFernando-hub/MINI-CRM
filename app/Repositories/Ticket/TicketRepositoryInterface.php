@@ -15,9 +15,9 @@ interface TicketRepositoryInterface
 
     public function create(TicketDTO $data): Ticket;
 
-    public function update($id, TicketUpdateDTO $data): Ticket;
+    public function update(Ticket $ticket, TicketUpdateDTO $data): Ticket;
 
-    public function delete($id): void;
+    public function delete(Ticket $ticket): bool;
 
     public function totalTickets(): int;
 

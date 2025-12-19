@@ -8,7 +8,7 @@ use App\DTOs\Ticket\TicketUpdateDTO;
 use App\Models\Ticket;
 use App\Repositories\Ticket\TicketRepositoryInterface;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class TicketService
 {
@@ -39,14 +39,26 @@ class TicketService
         return $this->repository->find($id);
     }
 
-    public function update($id, TicketUpdateDTO $data)
+    public function update($id, TicketUpdateDTO $data): Ticket
     {
-        return $this->repository->update($id, $data);
+        $ticket = $this->repository->find($id);
+
+        if (!$ticket) {
+            throw new ModelNotFoundException("Ticket with id {$id} not found");
+        }
+
+        return $this->repository->update($ticket, $data);
     }
     
-    public function delete($id)
+    public function delete($id): void
     {
-        $this->repository->delete($id);
+        $ticket = $this->repository->find($id);
+
+        if (!$ticket) {
+            throw new ModelNotFoundException("Ticket with id {$id} not found");
+        }
+
+        $this->repository->delete($ticket);
     }
 
     public function totalTickets(): int
