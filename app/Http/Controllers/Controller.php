@@ -5,7 +5,7 @@ use OpenApi\Annotations as OA;
 
 /**
  * @OA\Info(
- *     title="APIs For Thrift Store",
+ *     title="APIs MINI-CRM",
  *     version="1.0.0"
  * )
  *
