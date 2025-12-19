@@ -32,7 +32,7 @@
                 <x-button type="primary" class="w-full">{{ __('Sign In') }}</x-button>
             </form>
 
-            @if (Route::has('register'))
+            {{-- @if (Route::has('register'))
                 <!-- Register Link -->
                 <div class="text-center mt-6">
                     <p class="text-sm text-gray-600 dark:text-gray-400">
@@ -41,7 +41,7 @@
                             class="text-blue-600 dark:text-blue-400 hover:underline font-medium">{{ __('Sign up') }}</a>
                     </p>
                 </div>
-            @endif
+            @endif --}}
         </div>
     </div>
 </x-layouts.auth>
